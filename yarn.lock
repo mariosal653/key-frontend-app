@@ -855,6 +855,15 @@
     postcss "^8.4.41"
     tailwindcss "4.1.11"
 
+"@tailwindcss/vite@^4.1.11":
+  version "4.1.11"
+  resolved "https://registry.npmjs.org/@tailwindcss/vite/-/vite-4.1.11.tgz"
+  integrity sha512-RHYhrR3hku0MJFRV+fN2gNbDNEh3dwKvY8XJvTxCSXeMOsCRSr+uKvDWQcbizrHgjML6ZmTE5OwMrl5wKcujCw==
+  dependencies:
+    "@tailwindcss/node" "4.1.11"
+    "@tailwindcss/oxide" "4.1.11"
+    tailwindcss "4.1.11"
+
 "@types/babel__core@^7.20.5":
   version "7.20.5"
   resolved "https://registry.npmjs.org/@types/babel__core/-/babel__core-7.20.5.tgz"
