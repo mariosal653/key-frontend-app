@@ -30,7 +30,7 @@ const RegistrarAlumnoForm = () => {
             const token = await auth.currentUser?.getIdToken();
             if (!token) throw new Error("Token de autenticación no disponible.");
 
-            const response = await fetch("http://localhost:8080/api/registro/alumnos", {
+            const response = await fetch("https://key-backend-service.onrender.com/api/registro/alumnos", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
