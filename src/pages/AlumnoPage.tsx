@@ -1,9 +1,8 @@
-
+import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
-const DashboardAlumno = () => {
+const AlumnoPage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -18,7 +17,7 @@ const DashboardAlumno = () => {
 
   return (
     <Layout>
-      <div className="h-screen flex flex-col items-center justify-center bg-gray-100 px-4">
+      <div className="h-screen flex items-center justify-center bg-gray-100 px-4">
         <div className="bg-white p-8 rounded shadow-md w-full max-w-md text-center">
           <h1 className="text-2xl font-bold mb-4 text-gray-800">Bienvenido, Alumno</h1>
           <p className="text-gray-600 mb-6">
@@ -30,7 +29,7 @@ const DashboardAlumno = () => {
               onClick={goToBoletas}
               className="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition"
             >
-              Ver Mis Notas
+              Ver Boleta de Notas
             </button>
 
             <button
@@ -46,4 +45,4 @@ const DashboardAlumno = () => {
   );
 };
 
-export default DashboardAlumno;
+export default AlumnoPage;

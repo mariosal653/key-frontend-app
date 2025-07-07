@@ -5,22 +5,45 @@ import DashboardProfesor from "./pages/ProfesorDashboard";
 import DashboardAlumno from "./pages/AlumnoDashboard";
 import { useAuth } from "./context/AuthContext";
 import { PrivateRoute } from "./components/PrivateRoute";
+import BoletasPage from "./pages/BoletasPage";
+import RegistrarAlumnoForm from "./pages/RegistrarAlumnoForm";
 
 function App() {
-  const { user, role } = useAuth();
+  const { user, role, loading } = useAuth();
 
+  if (loading) return <div className="text-center mt-10">Cargando...</div>;
+
+  const getRedirectPath = () => {
+    switch (role) {
+      case "REGISTRO":
+        return "/registro";
+      case "PROFESOR":
+        return "/profesor";
+      case "ALUMNO":
+        return "/alumno";
+      default:
+        return "/login";
+    }
+  };
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
 
-        {/* Rutas protegidas por rol */}
         <Route
           path="/registro"
           element={
             <PrivateRoute allowedRoles={["REGISTRO"]}>
               <DashboardRegistro />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/registro/alumno"
+          element={
+            <PrivateRoute allowedRoles={["REGISTRO"]}>
+              <RegistrarAlumnoForm />
             </PrivateRoute>
           }
         />
@@ -35,6 +58,15 @@ function App() {
         />
 
         <Route
+          path="/registro/boletas"
+          element={
+            <PrivateRoute allowedRoles={["REGISTRO"]}>
+              <BoletasPage />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
           path="/alumno"
           element={
             <PrivateRoute allowedRoles={["ALUMNO"]}>
@@ -43,27 +75,16 @@ function App() {
           }
         />
 
-        {/* Redirección genérica según rol */}
+        <Route path="/" element={<Navigate to={user ? getRedirectPath() : "/login"} />} />
         <Route
-          path="/"
+          path="/alumno/boletas"
           element={
-            user ? (
-              <Navigate
-                to={
-                  {
-                    REGISTRO: "/registro",
-                    PROFESOR: "/profesor",
-                    ALUMNO: "/alumno",
-                  }[role || ""] || "/login"
-                }
-              />
-            ) : (
-              <Navigate to="/login" />
-            )
+            <PrivateRoute allowedRoles={["ALUMNO"]}>
+              <BoletasPage />
+            </PrivateRoute>
           }
         />
 
-        {/* Catch-all para rutas inválidas */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

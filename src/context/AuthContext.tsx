@@ -52,7 +52,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const token = await currentUser.getIdToken();
         const decoded = jwtDecode<DecodedToken>(token);
         setRole(decoded.role);
-        console.log("Rol detectado:", decoded.role);
       } else {
         setRole(null);
       }
